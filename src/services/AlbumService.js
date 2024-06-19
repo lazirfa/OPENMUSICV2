@@ -42,6 +42,7 @@ class AlbumsService {
     if (!fetchAlbum.rows.length) {
       throw new NotFoundError('Album tidak ditemukan');
     }
+    
     return {
       id: fetchAlbum.rows[0].id,
       name: fetchAlbum.rows[0].name,

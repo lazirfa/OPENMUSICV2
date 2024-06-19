@@ -4,6 +4,7 @@ class SongsHandler {
   constructor(service,validator) {
     this._service = service;
     this._validator = validator;
+
     this.postSongHandler = this.postSongHandler.bind(this);
     this.getSongsHandler = this.getSongsHandler.bind(this);
     this.getSongByIdHandler = this.getSongByIdHandler.bind(this);
@@ -61,6 +62,7 @@ class SongsHandler {
       },
     };
   }
+
   async getSongByIdHandler(request,h) {
     try {
       const {
@@ -94,6 +96,7 @@ class SongsHandler {
       return response;
     }
   }
+
   async putSongByIdHandler(request,h) {
     try {
       this._validator.validateSongPayload(request.payload);
@@ -128,6 +131,7 @@ class SongsHandler {
     }
 
   }
+  
   async deleteSongByIdHandler(request,h) {
     try {
       const {
