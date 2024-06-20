@@ -1,7 +1,14 @@
+const ClientError = require("../../exceptions/ClientError");
+
 class PlaylistSongActivitiesHandler {
     constructor(service, validator) {
         this._service = service;
         this._validator = validator;
+
+        this.postPlaylistSongActivitiesHandler = this.postPlaylistSongActivitiesHandler.bind(this);
+        this.getPlaylistSongActivitiesByIdHandler = this.getPlaylistSongActivitiesByIdHandler.bind(this);
+        this.putPlaylistSongActivitiesByIdHandler = this.putPlaylistSongActivitiesByIdHandler.bind(this);
+        this.deletePlaylistSongActivitiesByIdHandler = this.deletePlaylistSongActivitiesByIdHandler.bind(this);
     }
 
     async postPlaylistSongActivitiesHandler(request,h) {

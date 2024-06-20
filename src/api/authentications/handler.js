@@ -1,3 +1,5 @@
+const ClientError = require("../../exceptions/ClientError");
+
 class AuthenticationsHandler {
     constructor(authenticationsService, usersService, tokenManager, validator) {
       this._authenticationsService = authenticationsService;
@@ -12,6 +14,7 @@ class AuthenticationsHandler {
   
     async postAuthenticationHandler(request, h) {
       try{
+
         this._validator.validatePostAuthenticationPayload(request.payload);
   
         const { username, password } = request.payload;
@@ -38,6 +41,7 @@ class AuthenticationsHandler {
             status: "fail",
             message: error.message,
           });
+          
           response.code(error.statusCode);
           return response;
         }

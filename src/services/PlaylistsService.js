@@ -1,8 +1,8 @@
 const { Pool } = require("pg");
 const { nanoid } = require("nanoid");
-const InvariantError = require("../../exceptions/InvariantError");
-const NotFoundError = require("../../exceptions/NotFoundError");
-const AuthorizationError = require("../../exceptions/AuthorizationError");
+const InvariantError = require("../exceptions/InvariantError");
+const NotFoundError = require("../exceptions/NotFoundError");
+const AuthorizationError = require("../exceptions/AuthorizationError");
 
 class PlaylistsService {
     constructor(collaborationService) {
@@ -10,9 +10,7 @@ class PlaylistsService {
       this._collaborationService = collaborationService;
     }
   
-    async addPlaylist({
-      name, owner,
-    }) {
+    async addPlaylist(name, owner) {
       const id = `playlist-${nanoid(16)}`;
   
       const query = {

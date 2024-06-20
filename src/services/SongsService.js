@@ -4,7 +4,7 @@ const InvariantError = require('../exceptions/InvariantError');
 const { filterPerformerSongByParam, filterTitleSongByParam, mapSongDB } = require('../utils');
 const NotFoundError = require('../exceptions/NotFoundError');
 
-class SongsService_subm_v1 {
+class SongsService {
   constructor() {
     this._pool = new Pool();
   }
@@ -83,4 +83,4 @@ class SongsService_subm_v1 {
 
   
 }
-module.exports = SongsService_subm_v1;
+module.exports = SongsService;
