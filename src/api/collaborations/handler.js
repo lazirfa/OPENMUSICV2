@@ -12,7 +12,7 @@ class CollaborationsHandler {
   
     async postCollaborationHandler(request, h) {
       try{
-        this._validator.validateCollaborationPayload(request.payload);
+        this._validator.validateCollaborationsPayload(request.payload);
         const { id: credentialId } = request.auth.credentials;
         const { playlistId, userId } = request.payload;
     
@@ -51,7 +51,7 @@ class CollaborationsHandler {
   
     async deleteCollaborationHandler(request, h) {
       try {
-        this._validator.validateCollaborationPayload(request.payload);
+        this._validator.validateCollaborationsPayload(request.payload);
         const { id: credentialId } = request.auth.credentials;
         const { playlistId, userId } = request.payload;
     

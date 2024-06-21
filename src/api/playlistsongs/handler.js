@@ -1,4 +1,5 @@
 const ClientError = require("../../exceptions/ClientError");
+const playlists = require("../playlists");
 
 class PlaylistsongsHandler {
   constructor(playlistsongsService, playlistsService, validator) {
@@ -13,7 +14,7 @@ class PlaylistsongsHandler {
 
   async postPlaylistsongHandler(request, h) {
     try {
-      this._validator.validatePlaylistsongPayload(request.payload);
+      this._validator.validatePlaylistsongsPayload(request.payload);
       const { id: credentialId } = request.auth.credentials;
       const { songId } = request.payload;
       const { id: playlistId } = request.params;
@@ -59,16 +60,10 @@ class PlaylistsongsHandler {
       await this._playlistsService.verifyPlaylistAccess(playlistId, credentialId);
       const playlistsongs = await this._playlistsongsService.getPlaylistsongById(playlistId);
 
-      const playlistsongsProps = playlistsongs.map((playlistsong) => ({
-        id: playlistsong.id,
-        title: playlistsong.title,
-        performer: playlistsong.performer,
-      }));
-
       return {
         status: "success",
         data: {
-          songs: playlistsongsProps,
+          playlist: playlistsongs,
         },
       };
     } catch (error) {
@@ -94,7 +89,7 @@ class PlaylistsongsHandler {
 
   async deletePlaylistsongHandler(request, h) {
     try {
-      this._validator.validatePlaylistsongPayload(request.payload);
+      this._validator.validatePlaylistsongsPayload(request.payload);
       const { id: credentialId } = request.auth.credentials;
       const { songId } = request.payload;
       const { id: playlistId } = request.params;

@@ -7,8 +7,7 @@ exports.up = (pgm) => {
         primaryKey: true,
       },
       name: {
-        type: 'VARCHAR(50)',
-        unique: true,
+        type: 'TEXT',
         notNull: true,
       },
       owner: {
