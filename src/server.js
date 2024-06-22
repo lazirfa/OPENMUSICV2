@@ -44,12 +44,12 @@ const ClientError = require('./exceptions/ClientError');
 
 const init = async () => {
   const albumService = new AlbumsService();
-  const collaborationsService = new CollaborationsService();
   const usersService = new UsersService();
-  const authenticationsService = new AuthenticationsService();
   const songsService = new SongsService();
-  const playlistsService = new PlaylistsService();
+  const collaborationsService = new CollaborationsService();
+  const playlistsService = new PlaylistsService(collaborationsService);
   const playlistsongsService = new PlaylistsongsService(collaborationsService);
+  const authenticationsService = new AuthenticationsService();
 
   const server = Hapi.server({
     port: process.env.PORT,

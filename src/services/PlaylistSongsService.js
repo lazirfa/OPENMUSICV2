@@ -9,7 +9,18 @@ class PlaylistsongsService {
     this._pool = new Pool();
   }
 
-  async addPlaylistsong(songId, playlistId) {
+  async addPlaylistsong(playlistId, songId) {
+    const songQuery = {
+          text: 'SELECT * FROM songs WHERE id = $1',
+          values: [songId],
+    };
+
+    const songResult = await this._pool.query(songQuery);
+
+    if (!songResult.rowCount) {
+        throw new NotFoundError('Lagu tidak ditemukan.');
+    }
+
     const id = `playlistsong-${nanoid(16)}`;
 
     const query = {
@@ -62,6 +73,20 @@ class PlaylistsongsService {
 
     if (!result.rows.length) {
       throw new InvariantError("Lagu gagal dihapus");
+    }
+  }
+
+
+  async verifiyAvailableSong(songId) {
+    const query = {
+      text: "SELECT id FROM songs WHERE id = $1",
+      values: [songId],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new InvariantError("Lagu Tidak Tersedia");
     }
   }
 
